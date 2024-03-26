@@ -1,0 +1,57 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 10px;
+    background-color: #ddf7cd;
+}
+
+.container {
+    border: 3px #51bf11 solid;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.info {
+    width: 50%;
+    min-width: 300px;
+    padding: 10px;
+    border-radius: 50px;
+    background-color: #9dc983;
+    text-align: center;
+    position: relative;
+    top: -100px;
+}
+
+#add-task:hover {
+    color: #51bf11;
+    cursor: pointer;
+}
+
+.task-div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px #51bf11 solid;
+    width: 100%;
+    min-height: 150px;
+}
+
+#task-title, #task-date {
+    margin: 10px 20px;
+}
+
+#task-description {
+    width: 100%;
+    margin: 10px 20px;
+}
+
+.hidden {
+    display: none;
+}

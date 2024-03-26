@@ -1,0 +1,49 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lista de Tareas</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Vista inicial -->
+        <h1>Tareas pendientes</h1>
+        <div class="info">
+            <p>No existen tareas pendientes</p>
+        </div>
+
+        <!-- Vista funcional-->
+    <div class="task-div hidden">
+        <h2 id="task-title">Título de tarea</h2>
+        <p id="task-date">Fecha</p>
+        <p id="task-description">Descripción</p>
+    </div>
+
+        <h3 id="add-task">Agregar tarea</h3>
+    </div>
+
+    <!-- Dialog -->
+    <dialog id="form-dialog">
+        <form method="dialog">
+            <section>
+                <label for="title">Título de tarea</label>
+                <input type="text" id="title" name="title">
+            </section>
+            <section>
+                <label for="date">Fecha</label>
+                <input type="date" id="date" name="date">
+            </section>
+            <section>
+                <label for="description">Descripción</label>
+                <input type="text" id="description" name="description">
+            </section>
+            <menu>
+                <button id="cancel" type="reset" >Cancelar</button>
+                <button type="submit">Confirmar</button>
+            </menu>
+        </form>
+    </dialog>
+    <script src="app.js"></script>
+</body>
+</html>
