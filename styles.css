@@ -55,3 +55,21 @@ body {
 .hidden {
     display: none;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
+
+#close {
+    align-self: end;
+}
+
+form section {
+    padding: 5px 0;
+}
+
+form input {
+    width: 200px;
+}
