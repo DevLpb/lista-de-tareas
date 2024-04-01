@@ -31,15 +31,24 @@ let tasks = [];
 //Botón de confirmación. En pruebas.
 document.querySelector('form').addEventListener('submit', (event) => { 
     event.preventDefault(); 
-    console.log(title.value);
-    console.log(date.value);
-    console.log(description.value);
+
+    //Creación de objeto y asignación de valores de input. Inclusión en array de tareas.
+    let task = {
+      title: title.value,
+      date: date.value,
+      description: description.value
+    }
+
+    tasks.push(task);
+    
+    //Lógica de guardado de tareas. En pruebas.
+    localStorage.setItem("myTasks", JSON.stringify(tasks));
     alert("Tarea guardada");
     clearInputs();
-
+    console.log(JSON.parse(localStorage.getItem("myTasks")));
   });
 
-//Función para limpiear Inputs. En pruebas.
+//Función para limpiar Inputs. En pruebas.
   function clearInputs() {
     title.value = "";
     date.value = "";
