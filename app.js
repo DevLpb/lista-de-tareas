@@ -1,4 +1,5 @@
-const info = document.querySelector("info");
+const container = document.querySelector(".container");
+const info = document.querySelector(".info")
 const addTask = document.getElementById("add-task");
 const closeBtn = document.getElementById("close");
 const cancelBtn = document.getElementById("cancel");
@@ -8,6 +9,17 @@ const title = document.getElementById("title");
 const date = document.getElementById("date");
 const description = document.getElementById("description");
 
+function mostrarInfo() {
+  if (tasks.length !== 0) {
+    info.classList.add("hidden");
+  } else {
+    info.classList.remove("hidden");
+  }  
+}
+
+let tasks = [];
+
+mostrarInfo();
 
 // Al hacer click en el texto para agregar una nueva tarea, se abre el dialog con el formulario dentro.
 addTask.addEventListener('click', openDialog);
@@ -26,8 +38,6 @@ cancelBtn.addEventListener('click', () => {
     dialog.close();
 })
 
-let tasks = [];
-
 //Botón de confirmación. En pruebas.
 document.querySelector('form').addEventListener('submit', (event) => { 
     event.preventDefault(); 
@@ -45,7 +55,9 @@ document.querySelector('form').addEventListener('submit', (event) => {
     localStorage.setItem("myTasks", JSON.stringify(tasks));
     alert("Tarea guardada");
     clearInputs();
-    console.log(JSON.parse(localStorage.getItem("myTasks")));
+    dialog.close();
+    crearElemento();
+    mostrarInfo();
   });
 
 //Función para limpiar Inputs. En pruebas.
@@ -53,4 +65,17 @@ document.querySelector('form').addEventListener('submit', (event) => {
     title.value = "";
     date.value = "";
     description.value = "";
+  }
+  
+  //Función para crear un nuevo elemento HTML
+  function crearElemento() {
+
+    let taskDiv = document.createElement("div");
+    taskDiv.classList.add("task-div");
+    taskDiv.innerHTML = `
+    <h2 id="task-title">${tasks[tasks.length - 1].title}</h2>
+    <p id="task-date">${tasks[tasks.length - 1].date}</p>
+    <p id="task-description">${tasks[tasks.length - 1].description}</p>
+    `;
+ container.insertBefore(taskDiv, addTask);
   }
