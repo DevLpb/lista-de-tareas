@@ -52,6 +52,16 @@ body {
     margin: 10px 20px;
 }
 
+.buttons-div {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+.buttons-div button {
+    margin: 10px;
+}
+
 .hidden {
     display: none;
 }
