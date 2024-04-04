@@ -8,8 +8,6 @@ const dialog = document.getElementById("form-dialog");
 const title = document.getElementById("title");
 const date = document.getElementById("date");
 const description = document.getElementById("description");
-const editBtn = document.getElementById("edit-task");
-const deleteBtn = document.getElementById("delete-task");
 
 let tasks = JSON.parse(localStorage.getItem("myTasks")) || [];
 
@@ -42,7 +40,7 @@ function createElement(task) {
   <p id="task-description">${task.description}</p>
   <div class="buttons-div">
     <button id="edit-task">Editar</button>
-    <button id="delete-task">Borrar</button>
+    <button id="delete-task" data-title="${task.title}">Borrar</button>
     </div>
   `;
 container.insertBefore(taskDiv, addTask);
@@ -80,14 +78,39 @@ document.querySelector('form').addEventListener('submit', (event) => {
 
     tasks.push(task);
     
-    //Lógica de guardado de tareas. En pruebas.
+    //Lógica de guardado de tareas.
     localStorage.setItem("myTasks", JSON.stringify(tasks));
+    createElement(task);
     alert("Tarea guardada");
+    showInfo();
     clearInputs();
     dialog.close();
-    addElement(task);
-    showInfo();
   });
+
+  //Botón de eliminar.
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.addEventListener('click', event => {
+        // Comprueba si el evento se originó desde un botón de borrar y ejecutamos la función.
+        if (event.target.id === 'delete-task') {
+          // Obtiene el título de la tarea correspondiente al botón presionado.
+          let currentTaskTitle = event.target.getAttribute('data-title');
+
+          // Busca el índice de la tarea actual.
+          let index = tasks.findIndex(task => task.title === currentTaskTitle );
+
+          // Si el índice existe (no es -1), lo elimina del array de tareas.
+          if (index !== -1) {
+            tasks.splice(index, 1);
+          // Actualiza el localStorage con el nuevo array de tareas.
+            localStorage.setItem("myTasks", JSON.stringify(tasks));
+          //Elimina los elementos padres del botón en el DOM.
+            event.target.parentNode.parentNode.remove();
+          }
+          alert("Tarea eliminada");
+        }
+    });
+});
 
 //Función para limpiar Inputs. En pruebas.
   function clearInputs() {
@@ -102,12 +125,12 @@ document.querySelector('form').addEventListener('submit', (event) => {
     let taskDiv = document.createElement("div");
     taskDiv.classList.add("task-div");
     taskDiv.innerHTML = `
-    <h2 id="task-title">${tasks[tasks.length - 1].title}</h2>
-    <p id="task-date">${tasks[tasks.length - 1].date}</p>
-    <p id="task-description">${tasks[tasks.length - 1].description}</p>
+    <h2 id="task-title">${task.title}</h2>
+    <p id="task-date">${task.date}</p>
+    <p id="task-description">${task.description}</p>
     <div class="buttons-div">
     <button id="edit-task">Editar</button>
-    <button id="delete-task">Borrar</button>
+    <button id="delete-task" data-title="${task.title}">Borrar</button>
     </div>
     `;
  container.insertBefore(taskDiv, addTask);
